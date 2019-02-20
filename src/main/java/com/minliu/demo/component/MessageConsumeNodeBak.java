@@ -18,11 +18,11 @@ import org.springframework.stereotype.Component;
 public class MessageConsumeNodeBak {
     private static final Logger logger = LoggerFactory.getLogger(MessageConsumeNodeBak.class);
 
-    @JmsListener(destination = "a.queue")
+    @JmsListener(destination = "topic_test")
     @SendTo("out.queue")
     public String receiveQueue(String text){
-        logger.info("bak收到的消息：{}",text);
-        logger.info("bak收到消息返回给broker");
+        logger.info("消费者2收到的消息：{}",text);
+        logger.info("消费者2收到消息返回给broker");
         return text + "_bak";
     }
 }

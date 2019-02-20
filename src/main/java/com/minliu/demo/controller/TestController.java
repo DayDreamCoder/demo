@@ -1,13 +1,19 @@
 package com.minliu.demo.controller;
 
 import com.minliu.demo.service.MessageProduceService;
+import io.netty.channel.ChannelHandler;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.activemq.command.ActiveMQTopic;
+import org.springframework.transaction.jta.JtaTransactionManager;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.jms.Destination;
+import javax.jms.Queue;
+import javax.jms.Topic;
 
 /**
  * ClassName: TestController <br>
@@ -19,6 +25,9 @@ import javax.jms.Destination;
  */
 @RestController
 public class TestController {
+    private static final Queue queue= new ActiveMQQueue("queue_test");
+
+    private static final Topic topic = new ActiveMQTopic("topic_test");
 
     @Resource
     private MessageProduceService messageProduceService;
@@ -32,5 +41,15 @@ public class TestController {
     public void testSendMessage(@RequestParam(name = "msg")String message){
         Destination destination = new ActiveMQQueue("a.queue");
         messageProduceService.convertAndSend(destination,message);
+    }
+
+    @GetMapping("/queue/{msg}")
+    public void testSendQueueMessage(@PathVariable("msg")String msg){
+        messageProduceService.sendQueueMessage(queue,msg);
+    }
+
+    @GetMapping("/topic/{msg}")
+    public void testSendTopicMessage(@PathVariable("msg")String msg){
+        messageProduceService.sendTopicMessage(topic,msg);
     }
 }

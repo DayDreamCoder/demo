@@ -1,5 +1,6 @@
 package com.minliu.demo.component;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
@@ -17,8 +18,14 @@ import org.springframework.stereotype.Component;
 public class MessageConsumeNode {
     private static final Logger logger = LoggerFactory.getLogger(MessageConsumeNode.class);
 
-    @JmsListener(destination = "a.queue")
+
+    @JmsListener(destination = "queue_test")
     public void receiveMessage(String text){
-        logger.info("收到的消息为：{}",text);
+        logger.info("消费者1收到的队列消息为：{}",text);
+    }
+
+    @JmsListener(destination = "topic_test")
+    public void recMessage(String message){
+        logger.info("消费者1收到的主题消息为：{}",message);
     }
 }
