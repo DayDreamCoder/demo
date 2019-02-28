@@ -2,7 +2,6 @@ package com.minliu.demo.controller;
 
 import com.minliu.demo.service.MessageProduceService;
 import com.minliu.demo.service.RedisService;
-import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
