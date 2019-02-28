@@ -2,7 +2,6 @@ package com.minliu.demo.service;
 
 import com.alibaba.fastjson.JSON;
 import com.minliu.demo.util.FastJson2JsonSerializer;
-import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

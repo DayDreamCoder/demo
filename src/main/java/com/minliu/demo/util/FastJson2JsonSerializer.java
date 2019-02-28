@@ -24,6 +24,8 @@ public class FastJson2JsonSerializer<T> implements RedisSerializer<T> {
      */
     private static final String DEFAULT_CHARSET = "UTF-8";
 
+    private static final byte[] NULL = new byte[0];
+
     private static final Logger logger = LoggerFactory.getLogger(FastJson2JsonSerializer.class);
 
     private Class<T> clazz;
@@ -33,7 +35,7 @@ public class FastJson2JsonSerializer<T> implements RedisSerializer<T> {
     @Override
     public byte[] serialize(T t) throws SerializationException {
         try {
-            return JSON.toJSONString(t, SerializerFeature.WriteClassName).getBytes(charset);
+            return t == null ? NULL : JSON.toJSONString(t, SerializerFeature.WriteClassName).getBytes(charset);
         } catch (UnsupportedEncodingException e) {
             logger.error("不支持的字符集:{}", charset);
             throw new SerializationException(e.getMessage());
@@ -42,7 +44,7 @@ public class FastJson2JsonSerializer<T> implements RedisSerializer<T> {
 
     @Override
     public T deserialize(byte[] bytes) throws SerializationException {
-        if (bytes.length <= 0) {
+        if (bytes == null || bytes.length <= 0) {
             return null;
         }
         try {

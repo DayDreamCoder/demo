@@ -2,11 +2,14 @@ package com.minliu.demo.service;
 
 import com.alibaba.fastjson.JSON;
 import com.minliu.demo.pojo.Product;
+import com.minliu.demo.util.SpringContextHolder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.CollectionUtils;
 
@@ -53,5 +56,16 @@ public class RedisServiceTest {
         List<Product> products = redisService.getList("products", Product.class);
         if (!CollectionUtils.isEmpty(products))
             products.forEach(product -> logger.info(product.toString()));
+    }
+
+    @Test
+    public void testSentinelConfig(){
+        RedisConnectionFactory factory = SpringContextHolder.getBean(RedisConnectionFactory.class);
+        if (factory instanceof LettuceConnectionFactory){
+            logger.info("Yes。。。");
+            return;
+        }
+        logger.info("No。。。。。。");
+
     }
 }
