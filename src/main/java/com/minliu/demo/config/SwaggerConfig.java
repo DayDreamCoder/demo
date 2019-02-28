@@ -10,6 +10,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * 项目启动后可在 http://localhost:8082/swagger-ui.html查看定义的接口
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -22,8 +25,8 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("ShiroDemo RESTful APIs")
-                .description("Shiro Demo APIs Design").version("1.0").build();
+        return new ApiInfoBuilder().title("Spring Boot Demo Interfaces")
+                .description("Spring Boot Demo APIs Design").version("1.0").build();
     }
 
 }
