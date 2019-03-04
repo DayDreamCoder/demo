@@ -1,6 +1,8 @@
 package com.minliu.demo.config;
 
 import com.minliu.demo.util.FastJson2JsonSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -10,13 +12,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
+import org.springframework.data.redis.connection.Message;
+import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 
 /**
@@ -32,6 +40,8 @@ import java.lang.reflect.Method;
 @Component
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
+
+    private static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
     @Resource
     private RedisConnectionFactory connectionFactory;
@@ -80,6 +90,33 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.afterPropertiesSet();
 
         return redisTemplate;
+    }
+
+    @Bean
+    public RedisMessageListenerContainer redisMessageListenerContainer(MessageListener messageListener) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        container.addMessageListener(messageListener, new PatternTopic("redis-topic"));
+        return container;
+    }
+
+
+    @Bean("messageListener")
+    public MessageListener messageListener() {
+        return new Receiver();
+    }
+
+    private class Receiver implements MessageListener {
+        public void receiveMessage(String message) {
+            logger.info("Received message:{}", message);
+        }
+
+        @Override
+        public void onMessage(Message message, byte[] pattern) {
+            RedisSerializer<String> serializer = RedisSerializer.string();
+            String deserialize = serializer.deserialize(message.getBody());
+            logger.info(deserialize);
+        }
     }
 
 }

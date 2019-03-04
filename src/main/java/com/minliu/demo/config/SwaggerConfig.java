@@ -12,6 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * 项目启动后可在 http://localhost:8082/swagger-ui.html查看定义的接口
+ * @author minliu
  */
 @Configuration
 @EnableSwagger2
