@@ -1,5 +1,6 @@
 package com.minliu.demo.controller;
 
+import com.minliu.demo.config.websocket.MyWebSocketHandler;
 import com.minliu.demo.pojo.Product;
 import com.minliu.demo.service.MessageProduceService;
 import com.minliu.demo.service.ProductService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.socket.TextMessage;
 
 import javax.annotation.Resource;
 import javax.jms.JMSException;
@@ -40,6 +42,10 @@ public class TestController {
     @Resource
     private ProductService productService;
 
+    @Resource
+    private MyWebSocketHandler myWebSocketHandler;
+
+
     @GetMapping("/test")
     public String check() {
         return "OK";
@@ -68,5 +74,6 @@ public class TestController {
     public Product findProduct(@PathVariable("id") Integer id) {
         return productService.findById(id);
     }
+
 
 }
