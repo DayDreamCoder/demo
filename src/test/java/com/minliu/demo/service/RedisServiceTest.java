@@ -1,6 +1,5 @@
 package com.minliu.demo.service;
 
-import com.alibaba.fastjson.JSON;
 import com.minliu.demo.pojo.Product;
 import com.minliu.demo.util.SpringContextHolder;
 import org.junit.Test;
