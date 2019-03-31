@@ -13,7 +13,6 @@ import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 
-import javax.jms.JMSConnectionFactory;
 import javax.jms.Queue;
 import javax.jms.Session;
 
