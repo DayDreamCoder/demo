@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 跨域设置
+ * @author minliu
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -15,7 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowCredentials(true)
-                .allowedMethods("GET", "OPTIONS", "POST", "DELETE", "HEADER", "PUT", "PATCH")
+                .allowedMethods("*")
+                .allowedHeaders("*")
                 .maxAge(3600);
     }
 }

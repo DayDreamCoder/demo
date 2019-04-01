@@ -19,7 +19,6 @@ import org.springframework.util.StopWatch;
 import javax.annotation.Resource;
 import java.io.File;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +85,5 @@ public class DataTransferTest {
         long before = System.currentTimeMillis();
         lists.stream().parallel().forEach(dataList -> itemMapper.batchInsert(dataList));
         logger.info("COSTS:{}",System.currentTimeMillis() - before);
-
     }
 }

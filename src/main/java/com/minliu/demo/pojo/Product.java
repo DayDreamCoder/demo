@@ -2,6 +2,9 @@ package com.minliu.demo.pojo;
 
 import java.io.Serializable;
 
+/**
+ * @author minliu
+ */
 public class Product implements Serializable {
     private Integer id;
 

@@ -8,8 +8,6 @@ import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -26,11 +24,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author minliu
+ */
 @Configuration
 @EnableConfigurationProperties(DataSourceProperties.class)
 public class DruidSourceConfig {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     WallFilter wallFilter;
@@ -113,8 +112,8 @@ public class DruidSourceConfig {
      * @return
      */
     @Bean
-    public ServletRegistrationBean druidStatViewServle2() {
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+    public ServletRegistrationBean<StatViewServlet> druidStatViewServle2() {
+        ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
         servletRegistrationBean.addInitParameter("loginUsername", "admin2");
         servletRegistrationBean.addInitParameter("loginPassword", "123456");
         servletRegistrationBean.addInitParameter("resetEnable", "false");
@@ -127,8 +126,8 @@ public class DruidSourceConfig {
      * @return
      */
     @Bean
-    public FilterRegistrationBean druidStatFilter2() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
+    public FilterRegistrationBean<WebStatFilter> druidStatFilter2() {
+        FilterRegistrationBean<WebStatFilter> filterRegistrationBean = new FilterRegistrationBean<>(new WebStatFilter());
         //添加过滤规则.
         filterRegistrationBean.addUrlPatterns("/*");
         //添加不需要忽略的格式信息.
