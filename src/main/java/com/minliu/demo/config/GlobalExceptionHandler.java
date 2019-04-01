@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * 全局异常处理
+ * @author minliu
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {

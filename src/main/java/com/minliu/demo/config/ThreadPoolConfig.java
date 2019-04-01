@@ -13,6 +13,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * 自定义线程池
+ *
+ * @author minliu
+ */
 @Configuration
 @Component
 public class ThreadPoolConfig {
@@ -21,7 +26,9 @@ public class ThreadPoolConfig {
     @Resource
     private ThreadPoolProperties threadPoolProperties;
 
-    /*线程命名格式*/
+    /**
+     * 线程池命名格式
+     */
     private static ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat("cums-thread-%d").build();
 
     @Bean("executor")

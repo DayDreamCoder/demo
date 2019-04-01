@@ -4,6 +4,9 @@ import com.minliu.demo.pojo.Product;
 
 import java.util.List;
 
+/**
+ * @author minliu
+ */
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer id);
 
