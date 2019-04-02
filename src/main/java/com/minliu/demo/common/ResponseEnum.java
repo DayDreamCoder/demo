@@ -1,14 +1,14 @@
 package com.minliu.demo.common;
 
 /**
- * ClassName: Response <br>
+ * ClassName: ResponseEnum <br>
  * date: 4:35 PM 01/04/2019 <br>
  *
  * @author: liumin
  * @version: 0.0.1-SNAPSHOT
  * @since: JDK 1.8
  */
-public enum Response {
+public enum ResponseEnum {
 
     /**
      * 成功
@@ -47,7 +47,7 @@ public enum Response {
      */
     private String message;
 
-    Response(Integer code, String message) {
+    ResponseEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

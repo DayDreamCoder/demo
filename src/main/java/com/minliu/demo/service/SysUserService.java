@@ -1,10 +1,16 @@
 package com.minliu.demo.service;
 
+import com.minliu.demo.config.security.JwtService;
+import com.minliu.demo.config.security.UserDetailServiceImpl;
 import com.minliu.demo.mapper.SysUserMapper;
 import com.minliu.demo.pojo.SysRole;
 import com.minliu.demo.pojo.SysUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,28 +29,50 @@ import java.util.List;
  * @since: JDK 1.8
  */
 @Service
-public class SysUserService implements UserDetailsService {
+@SuppressWarnings("all")
+public class SysUserService {
     private static final Logger logger = LoggerFactory.getLogger(SysUserService.class);
 
     @Resource
     private SysUserMapper sysUserMapper;
 
-    public SysUser findById(Integer id){
+    @Resource
+    private AuthenticationManager authenticationManager;
+
+    @Resource
+    private UserDetailServiceImpl userDetailService;
+
+    @Resource
+    private JwtService jwtService;
+
+
+    public SysUser findById(Integer id) {
         return sysUserMapper.selectByPrimaryKey(id);
     }
 
-    public SysUser findByName(String username){
-        logger.debug("查询用户名:{}",username);
+    public SysUser findByName(String username) {
+        logger.debug("查询用户名:{}", username);
         return sysUserMapper.selectByName(username);
     }
 
-    public List<SysRole> listRolesByUser(Integer id){
-        logger.debug("根据用户ID查询用户权限，ID:{}",id);
+    public List<SysRole> listRolesByUser(Integer id) {
+        logger.debug("根据用户ID查询用户权限，ID:{}", id);
         return sysUserMapper.findRolesById(id);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public String login(String username, String password) {
+        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
+        try {
+            final Authentication authentication = authenticationManager.authenticate(upToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            final UserDetails userDetails = userDetailService.loadUserByUsername(username);
+            final String token = jwtService.generateToken(userDetails);
+            return token;
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            return null;
+        }
     }
+
+
 }

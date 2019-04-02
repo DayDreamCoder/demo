@@ -1,5 +1,7 @@
 package com.minliu.demo.common;
 
+import com.google.common.collect.Maps;
+
 import java.io.Serializable;
 import java.util.Map;
 
@@ -17,13 +19,18 @@ public class WebResponse implements Serializable {
 
     private String msg;
 
-    private transient Map<String,Object> data;
+    private transient Map<String, Object> data;
 
     private String jwtToken;
 
-    public WebResponse(Response response) {
-        this.code = response.getCode();
-        this.msg = response.getMessage();
+    public WebResponse(ResponseEnum responseEnum) {
+        this.code = responseEnum.getCode();
+        this.msg = responseEnum.getMessage();
+    }
+
+    public void putData(String name, Object value) {
+        this.data = Maps.newHashMap();
+        data.put(name, value);
     }
 
     public Integer getCode() {

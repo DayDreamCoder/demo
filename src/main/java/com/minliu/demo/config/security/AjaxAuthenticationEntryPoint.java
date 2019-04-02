@@ -1,13 +1,12 @@
 package com.minliu.demo.config.security;
 
 import com.alibaba.fastjson.JSON;
-import com.minliu.demo.common.Response;
+import com.minliu.demo.common.ResponseEnum;
 import com.minliu.demo.common.WebResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,8 +23,8 @@ import java.io.IOException;
 @Component
 public class AjaxAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        WebResponse webResponse = new WebResponse(Response.NOT_LOGIN);
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
+        WebResponse webResponse = new WebResponse(ResponseEnum.NOT_LOGIN);
         response.getWriter().write(JSON.toJSONString(webResponse));
     }
 }

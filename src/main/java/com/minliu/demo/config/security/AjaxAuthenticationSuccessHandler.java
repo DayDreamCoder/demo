@@ -1,7 +1,7 @@
 package com.minliu.demo.config.security;
 
 import com.alibaba.fastjson.JSON;
-import com.minliu.demo.common.Response;
+import com.minliu.demo.common.ResponseEnum;
 import com.minliu.demo.common.WebResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -26,6 +26,6 @@ import java.io.IOException;
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        response.getWriter().write(JSON.toJSONString(new WebResponse(Response.LOGIN_SUCCESS)));
+        response.getWriter().write(JSON.toJSONString(new WebResponse(ResponseEnum.LOGIN_SUCCESS)));
     }
 }
