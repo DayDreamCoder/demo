@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.minliu.demo.common.Constant;
 import com.minliu.demo.common.ResponseEnum;
 import com.minliu.demo.common.WebResponse;
-import com.minliu.demo.config.security.UserDetailServiceImpl;
 import com.minliu.demo.pojo.SysUser;
 import com.minliu.demo.service.SysRoleService;
 import com.minliu.demo.service.SysUserService;
@@ -12,10 +11,6 @@ import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -33,6 +33,10 @@ public class WebResponse implements Serializable {
         data.put(name, value);
     }
 
+    public void initData(){
+        this.data = Maps.newHashMap();
+    }
+
     public Integer getCode() {
         return code;
     }
