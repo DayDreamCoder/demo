@@ -1,34 +1,29 @@
 package com.minliu.demo.pojo;
 
-import java.io.Serializable;
+import com.minliu.demo.pojo.audit.DateAudit;
 
-public class User implements Serializable {
+import java.io.Serializable;
+import java.util.Set;
+
+/**
+ * 用户
+ *
+ * @author minliu
+ */
+public class User extends DateAudit implements Serializable {
     private Integer id;
 
     private String username;
 
     private String password;
 
-    private String nickname;
-
-    private Integer age;
+    private String email;
 
     private String phone;
 
-    private String email;
+    private Set<Role> roles;
 
-    public User() {
-    }
-
-    public User(Integer id, String username, String password, String nickname, Integer age, String phone, String email) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.age = age;
-        this.phone = phone;
-        this.email = email;
-    }
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -43,7 +38,7 @@ public class User implements Serializable {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -51,31 +46,7 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getEmail() {
@@ -83,19 +54,22 @@ public class User implements Serializable {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email == null ? null : email.trim();
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", age=" + age +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

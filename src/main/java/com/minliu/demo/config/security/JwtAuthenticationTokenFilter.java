@@ -30,7 +30,7 @@ import java.io.IOException;
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Resource
-    private UserDetailServiceImpl userDetailsService;
+    private CustomUserDetailService userDetailsService;
 
     @Resource
     private JwtService jwtService;
@@ -49,27 +49,42 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String header = request.getHeader(jwtProperties.getHeader());
-        String tokenHead = jwtProperties.getTokenHead();
-        //验证token 头部
-        if (StringUtils.hasText(header) && header.startsWith(tokenHead)) {
-            String authToken = header.substring(tokenHead.length());
-            String username = jwtService.getUsernameFromToken(authToken);
+        try {
+            //从请求头中获取token
+            String jwt = getJwtFromRequest(request);
+            //验证token
+            if (StringUtils.hasText(jwt) && jwtService.isTokenValid(jwt)) {
+                Integer id = jwtService.getUserIdFromToken(jwt);
+                /*
+                    Note that you could also encode the user's username and roles inside JWT claims
+                    and create the UserDetails object by parsing those claims from the JWT.
+                    That would avoid the following database hit. It's completely up to you.
+                 */
+                UserDetails userDetails = userDetailsService.findUserById(id);
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-            SecurityContext securityContext = SecurityContextHolder.getContext();
-            //验证用户名
-            if (StringUtils.hasText(username) && securityContext.getAuthentication() == null) {
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                //验证用户名是否有效以及token是否过期
-                if (jwtService.isTokenValid(authToken, userDetails)) {
-                    //token有效将用户信息设置到ThreadLocal
-                    UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    securityContext.setAuthentication(authentication);
-                }
+                //绑定当前线程
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
+        } catch (Exception e) {
+            logger.error("Could not set user authentication in security context", e);
         }
+
         filterChain.doFilter(request, response);
+    }
+
+    /**
+     * 从request中获取token
+     *
+     * @param request 请求
+     * @return token
+     */
+    private String getJwtFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader(jwtProperties.getHeader());
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(jwtProperties.getTokenHead())) {
+            return bearerToken.substring(7, bearerToken.length());
+        }
+        return null;
     }
 }

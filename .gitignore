@@ -15,7 +15,7 @@
 *.iws
 *.iml
 *.ipr
-.https://github.com/jwtk/jjwt/tree/master/impl/src/test/groovy/io/jsonwebtoken
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

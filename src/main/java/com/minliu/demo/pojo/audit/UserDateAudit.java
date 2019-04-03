@@ -1,30 +1,30 @@
 package com.minliu.demo.pojo.audit;
 
 /**
- * 创建者，修改者
+ * 创建者，修改者(主键)
  *
  * @author: liumin
  * @date: 2019/4/2 22:52
  * @version: JDK1.8
  */
 public abstract class UserDateAudit extends DateAudit{
-    private String createdBy;
+    private Integer createdBy;
 
-    private String updatedBy;
+    private Integer updatedBy;
 
-    public String getCreatedBy() {
+    public Integer getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(String createdBy) {
+    public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
     }
 
-    public String getUpdatedBy() {
+    public Integer getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(String updatedBy) {
+    public void setUpdatedBy(Integer updatedBy) {
         this.updatedBy = updatedBy;
     }
 }

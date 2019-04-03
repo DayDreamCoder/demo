@@ -16,6 +16,11 @@ public enum ResponseEnum {
     SUCCESS(0, "success"),
 
     /**
+     * 注册成功
+     */
+    REGISTER_SUCCESS(99, "register success"),
+
+    /**
      * 登录成功
      */
     LOGIN_SUCCESS(100, "login success"),
@@ -34,7 +39,13 @@ public enum ResponseEnum {
     /**
      * 退出成功
      */
-    LOGOUT_SUCCESS(104, "logout success");
+    LOGOUT_SUCCESS(104, "logout success"),
+
+
+    /**
+     * 系统异常
+     */
+    SERVER_ERROR(500,"server error");
 
 
     /**

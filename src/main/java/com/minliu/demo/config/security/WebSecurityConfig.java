@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,26 +30,18 @@ import javax.annotation.Resource;
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(
+        securedEnabled = true,
+        jsr250Enabled = true,
+        prePostEnabled = true
+)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 未登陆时返回 JSON 格式的数据给前端
      */
     @Resource
-    private AjaxAuthenticationEntryPoint authenticationEntryPoint;
-
-    /**
-     * 登录成功返回JSON给前端
-     */
-    @Resource
-    private AjaxAuthenticationSuccessHandler authenticationSuccessHandler;
-
-    /**
-     * 登录失败返回JSON给前端
-     */
-    @Resource
-    private AjaxAuthenticationFailureHandler authenticationFailureHandler;
+    private AjaxAuthenticationEntryPoint unauthorizedHandler;
 
     /**
      * 无权访问返回的 JSON 格式数据给前端
@@ -56,17 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private AjaxAccessDeniedHandler accessDeniedHandler;
 
-    /**
-     * 退出成功返回 JSON 格式数据给前端
-     */
-    @Resource
-    private AjaxLogoutSuccessHandler logoutSuccessHandler;
-
-    @Resource
-    private UserDetailServiceImpl userDetailsService;
-
     @Resource
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+
+    @Resource
+    private CustomUserDetailService userDetailService;
 
     /**
      * 密码加密器
@@ -83,27 +70,51 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      *
      * @return AuthenticationManager
      */
-    @Bean
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailService)
+                .passwordEncoder(passwordEncoder());
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().httpBasic().authenticationEntryPoint(authenticationEntryPoint)
-                .and().formLogin()
-                .failureHandler(authenticationFailureHandler)
-                .and().authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/user/**", "/login", "/static/**", "/js/**", "/css/**", "/images/**", "/fonts/**").permitAll()
-                .requestMatchers(CorsUtils::isCorsRequest).permitAll()
-                .anyRequest().authenticated()
-                .and().headers().cacheControl();
+       http
+               .cors()
+                    .and()
+               .csrf()
+                    .disable()
+               .exceptionHandling()
+                    .accessDeniedHandler(accessDeniedHandler)
+                    .authenticationEntryPoint(unauthorizedHandler)
+                    .and()
+               .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+               .userDetailsService(userDetailService)
+               .authorizeRequests()
+               .antMatchers("/",
+                       "/favicon.ico",
+                       "/**/*.png",
+                       "/**/*.gif",
+                       "/**/*.svg",
+                       "/**/*.jpg",
+                       "/**/*.html",
+                       "/**/*.css",
+                       "/**/*.js")
+                        .permitAll()
+               .antMatchers("/api/auth/**")
+                        .permitAll()
+               .anyRequest()
+                        .authenticated();
+
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        //无权访问
-        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+
 
     }
 
@@ -118,10 +129,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/druid/**");
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
+
 
 }
