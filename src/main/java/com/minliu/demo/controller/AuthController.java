@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,9 +37,12 @@ public class AuthController {
     private AuthService authService;
 
     @ApiOperation(value = "用户登录认证")
-    @PostMapping
+    @PostMapping("/signIn")
     public WebResponse login(@Valid @RequestBody LoginRequest loginRequest){
         String token = authService.authenticateUser(loginRequest);
+        if (! StringUtils.hasText(token)) {
+            return new WebResponse(ResponseEnum.LOGIN_FAILED);
+        }
         WebResponse webResponse = new WebResponse(ResponseEnum.LOGIN_SUCCESS);
         webResponse.putData(Constant.TOKEN,token);
         return webResponse;

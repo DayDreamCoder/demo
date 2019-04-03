@@ -38,7 +38,7 @@ public class JwtService {
                 .setSubject(Integer.toString(principal.getId()))
                 .setIssuedAt(new Date())
                 .setExpiration(expireDate)
-                .signWith(SignatureAlgorithm.ES512,jwtProperties.getSecret())
+                .signWith(SignatureAlgorithm.HS512,jwtProperties.getSecret())
                 .compact();
     }
 

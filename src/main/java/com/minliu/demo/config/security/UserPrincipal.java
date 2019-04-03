@@ -1,14 +1,17 @@
 package com.minliu.demo.config.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.minliu.demo.pojo.Role;
 import com.minliu.demo.pojo.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -48,11 +51,23 @@ public class UserPrincipal implements UserDetails {
         this.authorities = authorities;
     }
 
+    /**
+     * 复制属性
+     * @param user user
+     * @return UserPrincipal
+     */
     public static UserPrincipal create(User user) {
-        List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
-
+        if (user == null ){
+            return null;
+        }
+        //授权
+        List<SimpleGrantedAuthority> authorities = null;
+        Set<Role> roles = user.getRoles();
+        if (! CollectionUtils.isEmpty(roles)) {
+            authorities = user.getRoles().stream()
+                    .map(role -> new SimpleGrantedAuthority(role.getName()))
+                    .collect(Collectors.toList());
+        }
         return new UserPrincipal(
                 user.getId(),
                 user.getUsername(),
