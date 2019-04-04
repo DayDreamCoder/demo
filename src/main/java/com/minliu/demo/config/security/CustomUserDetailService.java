@@ -1,6 +1,5 @@
 package com.minliu.demo.config.security;
 
-import com.minliu.demo.exception.AppException;
 import com.minliu.demo.exception.ResourceNotFoundException;
 import com.minliu.demo.mapper.UserMapper;
 import com.minliu.demo.pojo.User;
@@ -35,18 +34,14 @@ public class CustomUserDetailService implements UserDetailsService {
 
     //todo 循环调用，待解决
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         User user = Optional.ofNullable(userMapper.selectByUsernameOrEmail(usernameOrEmail))
-                .orElseThrow(() -> {
-                    logger.info("user:{}",usernameOrEmail);
-                    logger.error("User not found with username or email : {}", usernameOrEmail);
-                    return new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail);
-                });
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail));
         return UserPrincipal.create(user);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public UserDetails findUserById(Integer id) {
         try {
             logger.info("查询用户Id:{}", id);

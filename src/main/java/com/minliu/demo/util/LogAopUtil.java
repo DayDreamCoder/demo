@@ -41,7 +41,7 @@ public class LogAopUtil {
     @Before("pointCut()")
     public void doBefore(JoinPoint joinPoint) {
         startTime.set(System.currentTimeMillis());
-        logger.info("start logging...");
+        logger.info("------LOGGING START------");
         //获取当前request对象
         RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) requestAttributes;
@@ -61,7 +61,7 @@ public class LogAopUtil {
 
     @After("pointCut()")
     public void doAfter() {
-        logger.info("LogAopUtil.doAfter()");
+        logger.info("------LOGGING END------");
     }
 
     @AfterReturning("pointCut()")

@@ -29,6 +29,7 @@ public class AjaxAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         logger.error("未登录用户调用...");
+        logger.info("URL:{}",request.getRequestURL().toString());
         WebResponse webResponse = new WebResponse(ResponseEnum.NOT_LOGIN);
         response.getWriter().write(JSON.toJSONString(webResponse));
     }

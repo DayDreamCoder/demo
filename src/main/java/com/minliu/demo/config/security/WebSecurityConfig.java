@@ -50,8 +50,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private AjaxAuthenticationFailureHandler authenticationFailureHandler;
 
-    @Resource
-    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+    @Bean
+    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter(){
+        return new JwtAuthenticationTokenFilter();
+    }
 
     @Resource
     private CustomUserDetailService userDetailService;
@@ -73,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
-    public AuthenticationManager authenticationManager() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
@@ -105,6 +107,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                .authorizeRequests()
                .antMatchers("/",
                        "/favicon.ico",
+                       "/csrf/**",
                        "/**/*.png",
                        "/**/*.gif",
                        "/**/*.svg",
@@ -118,7 +121,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                .anyRequest()
                         .authenticated();
 
-        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
 
     }

@@ -20,6 +20,8 @@ import javax.validation.Valid;
 
 
 /**
+ * 用户注册登录控制层
+ *
  * ClassName: AuthController <br>
  * date: 3:16 PM 03/04/2019 <br>
  *
@@ -41,6 +43,7 @@ public class AuthController {
     public WebResponse login(@Valid @RequestBody LoginRequest loginRequest){
         String token = authService.authenticateUser(loginRequest);
         if (! StringUtils.hasText(token)) {
+            logger.info("LOGIN FAILED.");
             return new WebResponse(ResponseEnum.LOGIN_FAILED);
         }
         WebResponse webResponse = new WebResponse(ResponseEnum.LOGIN_SUCCESS);

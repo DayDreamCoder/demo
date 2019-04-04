@@ -26,7 +26,6 @@ import java.io.IOException;
  * @version: 0.0.1-SNAPSHOT
  * @since: JDK 1.8
  */
-@Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Resource
