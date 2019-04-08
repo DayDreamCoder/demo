@@ -1,4 +1,4 @@
-package com.minliu.demo.config.security;
+package com.minliu.demo.config.security.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.minliu.demo.common.ResponseEnum;
@@ -23,9 +23,9 @@ import java.io.PrintWriter;
  * @since: JDK 1.8
  */
 @Component
-public class AjaxAccessDeniedHandler implements AccessDeniedHandler {
+public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(AjaxAccessDeniedHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(RestAccessDeniedHandler.class);
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException){

@@ -22,4 +22,6 @@ public class Constant {
     public static final String SUB = "sub";
 
     public static final String TOKEN = "token";
+
+    public static final String ROLE_USER = "ROLE_USER";
 }

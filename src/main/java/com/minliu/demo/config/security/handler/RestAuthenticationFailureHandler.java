@@ -1,4 +1,4 @@
-package com.minliu.demo.config.security;
+package com.minliu.demo.config.security.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.minliu.demo.common.ResponseEnum;
@@ -23,9 +23,9 @@ import java.io.IOException;
  * @since: JDK 1.8
  */
 @Component
-public class AjaxAuthenticationFailureHandler implements AuthenticationFailureHandler {
+public class RestAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(AjaxAuthenticationFailureHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(RestAuthenticationFailureHandler.class);
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {

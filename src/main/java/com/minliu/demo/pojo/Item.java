@@ -4,21 +4,41 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
+ * 商品
+ *
  * @author minliu
  */
 public class Item implements Serializable {
     private Integer id;
 
+    /**
+     * 商品名称
+     */
     private String name;
 
+    /**
+     * 链接
+     */
     private String link;
 
+    /**
+     * 价格
+     */
     private BigDecimal price;
 
+    /**
+     * 商店
+     */
     private String store;
 
+    /**
+     * 好评数量
+     */
     private Integer comments;
 
+    /**
+     * 好评率
+     */
     private BigDecimal good;
 
     private static final long serialVersionUID = 1L;

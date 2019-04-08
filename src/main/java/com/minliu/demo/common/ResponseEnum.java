@@ -41,11 +41,29 @@ public enum ResponseEnum {
      */
     LOGOUT_SUCCESS(104, "logout success"),
 
+    /**
+     * 注册失败
+     */
+    REGISTER_FAILED(105, "register failed"),
 
+    /**
+     * 用户名已存在
+     */
+    USERNAME_EXISTS(106, "username is already taken"),
+
+    /**
+     * 邮箱已被注册
+     */
+    EMAIL_EXISTS(107, "email is already registered"),
+
+    /**
+     * 电话已被注册
+     */
+    PHONE_EXISTS(108, "phone is already registered"),
     /**
      * 系统异常
      */
-    SERVER_ERROR(500,"server error");
+    SERVER_ERROR(500, "server error");
 
 
     /**

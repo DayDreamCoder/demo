@@ -1,6 +1,7 @@
 package com.minliu.demo.pojo.payload;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 /**
  * 登录请求实体
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotBlank;
  * @version: 0.0.1-SNAPSHOT
  * @since: JDK 1.8
  */
-public class LoginRequest {
+public class LoginRequest implements Serializable{
     @NotBlank
     private String usernameOrEmail;
 

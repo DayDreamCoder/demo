@@ -23,6 +23,13 @@ public class User extends DateAudit implements Serializable {
 
     private Set<Role> roles;
 
+    public User(String username, String password, String email, String phone) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

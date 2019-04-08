@@ -1,4 +1,4 @@
-package com.minliu.demo.config.security;
+package com.minliu.demo.config.security.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.minliu.demo.common.ResponseEnum;
@@ -23,8 +23,8 @@ import java.io.IOException;
  * @since: JDK 1.8
  */
 @Component
-public class AjaxAuthenticationEntryPoint implements AuthenticationEntryPoint {
-    private static final Logger logger = LoggerFactory.getLogger(AjaxAuthenticationEntryPoint.class);
+public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    private static final Logger logger = LoggerFactory.getLogger(RestAuthenticationEntryPoint.class);
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {

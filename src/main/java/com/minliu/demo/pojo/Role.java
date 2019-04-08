@@ -12,6 +12,10 @@ public class Role implements Serializable {
 
     private String name;
 
+    public Role(String name) {
+        this.name = name;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -28,5 +32,15 @@ public class Role implements Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

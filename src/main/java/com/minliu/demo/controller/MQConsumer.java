@@ -43,7 +43,7 @@ public class MQConsumer {
                 count.getAndIncrement();
                 throw new JMSException("自定义错误...");
             }
-//            message.acknowledge();
+            message.acknowledge();
         } catch (JMSException e) {
             logger.info("重发次数:{}", count.get());
             logger.info(e.getMessage(), e);

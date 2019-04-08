@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * 返回给前端数据格式
+ *
  * ClassName: WebResponse <br>
  * date: 4:32 PM 01/04/2019 <br>
  *
@@ -20,8 +21,6 @@ public class WebResponse implements Serializable {
     private String msg;
 
     private transient Map<String, Object> data;
-
-    private String jwtToken;
 
     public WebResponse(ResponseEnum responseEnum) {
         this.code = responseEnum.getCode();
@@ -61,11 +60,4 @@ public class WebResponse implements Serializable {
         this.data = data;
     }
 
-    public String getJwtToken() {
-        return jwtToken;
-    }
-
-    public void setJwtToken(String jwtToken) {
-        this.jwtToken = jwtToken;
-    }
 }

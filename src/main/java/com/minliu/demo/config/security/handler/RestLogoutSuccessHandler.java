@@ -1,4 +1,4 @@
-package com.minliu.demo.config.security;
+package com.minliu.demo.config.security.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.minliu.demo.common.ResponseEnum;
@@ -23,9 +23,9 @@ import java.io.PrintWriter;
  * @since: JDK 1.8
  */
 @Component
-public class AjaxLogoutSuccessHandler implements LogoutSuccessHandler {
+public class RestLogoutSuccessHandler implements LogoutSuccessHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(AjaxLogoutSuccessHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(RestLogoutSuccessHandler.class);
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {

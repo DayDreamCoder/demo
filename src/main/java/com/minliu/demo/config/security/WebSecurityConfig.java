@@ -1,5 +1,8 @@
 package com.minliu.demo.config.security;
 
+import com.minliu.demo.config.security.handler.RestAccessDeniedHandler;
+import com.minliu.demo.config.security.handler.RestAuthenticationEntryPoint;
+import com.minliu.demo.config.security.handler.RestAuthenticationFailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,16 +42,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 未登陆时返回 JSON 格式的数据给前端
      */
     @Resource
-    private AjaxAuthenticationEntryPoint unauthorizedHandler;
+    private RestAuthenticationEntryPoint unauthorizedHandler;
 
     /**
      * 无权访问返回的 JSON 格式数据给前端
      */
     @Resource
-    private AjaxAccessDeniedHandler accessDeniedHandler;
+    private RestAccessDeniedHandler accessDeniedHandler;
 
     @Resource
-    private AjaxAuthenticationFailureHandler authenticationFailureHandler;
+    private RestAuthenticationFailureHandler authenticationFailureHandler;
 
     @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter(){
@@ -92,10 +95,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                .csrf()
                     .disable()
-               .formLogin()
+               /*.formLogin()
                     .loginProcessingUrl("/api/auth/signIn")
                     .failureHandler(authenticationFailureHandler)
-                    .and()
+                    .and()*/
                .exceptionHandling()
                     .accessDeniedHandler(accessDeniedHandler)
                     .authenticationEntryPoint(unauthorizedHandler)
@@ -122,7 +125,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .authenticated();
 
         http.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
 
     }
 
