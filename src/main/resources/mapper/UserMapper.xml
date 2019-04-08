@@ -117,7 +117,16 @@
             updated_at = #{updatedAt,jdbcType=TIMESTAMP}
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
+    <!-- 根据用户名，邮箱查询用户 -->
+    <select id="selectByUsernameOrEmail" resultMap="BaseResultMap">
+        select
+          <include refid="Base_Column_List"/>
+        from user
+        where username = #{usernameOrEmail,jdbcType=VARCHAR}
+        or email = #{usernameOrEmail,jdbcType=VARCHAR}
+    </select>
 
+    <!-- 查询某字段是否已存在 -->
     <select id="findData" resultType="java.lang.Integer">
         SELECT 1
         FROM `user`
@@ -136,7 +145,7 @@
         </where>
         LIMIT 1
     </select>
-
+    <!-- 指定角色 -->
     <insert id="assignRole">
         INSERT INTO user_roles (user_id, role_id)
             SELECT

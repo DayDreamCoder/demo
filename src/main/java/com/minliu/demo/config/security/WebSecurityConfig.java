@@ -2,7 +2,6 @@ package com.minliu.demo.config.security;
 
 import com.minliu.demo.config.security.handler.RestAccessDeniedHandler;
 import com.minliu.demo.config.security.handler.RestAuthenticationEntryPoint;
-import com.minliu.demo.config.security.handler.RestAuthenticationFailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -49,9 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Resource
     private RestAccessDeniedHandler accessDeniedHandler;
-
-    @Resource
-    private RestAuthenticationFailureHandler authenticationFailureHandler;
 
     @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter(){
@@ -129,7 +125,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/v2/api-docs",
                 "/login",
                 "/swagger-resources",

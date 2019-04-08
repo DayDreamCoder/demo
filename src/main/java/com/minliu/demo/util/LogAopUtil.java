@@ -61,16 +61,15 @@ public class LogAopUtil {
 
     @After("pointCut()")
     public void doAfter() {
-        logger.info("------LOGGING END------");
+        logger.info("LogAopUtil.doAfter()");
     }
 
     @AfterReturning("pointCut()")
     public void doAfterReturning() {
-        logger.info("LogAopUtil.doAfterReturning()");
         if (startTime != null && startTime.get() != null) {
             logger.info("costs {}ms", System.currentTimeMillis() - startTime.get());
             startTime.remove();
         }
+        logger.info("------LOGGING END------");
     }
-
 }

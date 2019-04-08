@@ -1,7 +1,8 @@
 package com.minliu.demo.config.security.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.minliu.demo.common.ResponseEnum;
+import com.minliu.demo.common.WebResponse;
+import com.minliu.demo.util.HttpResponseWriteUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -29,7 +30,8 @@ public class RestAuthenticationFailureHandler implements AuthenticationFailureHa
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-        logger.info("登录失败...");
-        response.getWriter().write(JSON.toJSONString(ResponseEnum.LOGIN_FAILED));
+        logger.warn("登录失败...");
+        WebResponse webResponse = new WebResponse(ResponseEnum.LOGIN_FAILED);
+        HttpResponseWriteUtils.writeData(webResponse,response);
     }
 }

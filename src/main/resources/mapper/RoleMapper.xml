@@ -56,7 +56,7 @@
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
     <!-- 根据用户Id查询权限 -->
-    <select id="getRolesByUserId" parameterType="java.lang.Integer">
+    <select id="getRolesByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM role

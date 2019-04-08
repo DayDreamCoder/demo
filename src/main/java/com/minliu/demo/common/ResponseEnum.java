@@ -1,6 +1,8 @@
 package com.minliu.demo.common;
 
 /**
+ * 响应状态码与信息
+ *
  * ClassName: ResponseEnum <br>
  * date: 4:35 PM 01/04/2019 <br>
  *
@@ -27,11 +29,11 @@ public enum ResponseEnum {
     /**
      * 未登录
      */
-    NOT_LOGIN(101, "not logged in"),
+    NOT_LOGIN(401, "not logged in"),
     /**
      * 没有权限
      */
-    NO_AUTHORITIES(102, "no authorities"),
+    NO_AUTHORITIES(403, "no authorities"),
     /**
      * 登录失败
      */

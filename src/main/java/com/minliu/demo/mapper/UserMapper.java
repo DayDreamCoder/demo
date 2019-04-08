@@ -11,11 +11,10 @@ public interface UserMapper {
     int insert(User record);
 
 
-
     User selectByPrimaryKey(Integer id);
 
 
-    User selectByUsernameOrEmail(String usernameOrEmail);
+    User selectByUsernameOrEmail(@Param("usernameOrEmail") String usernameOrEmail);
 
 
     int updateByPrimaryKey(User record);

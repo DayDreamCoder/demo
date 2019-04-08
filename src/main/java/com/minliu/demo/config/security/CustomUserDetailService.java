@@ -46,8 +46,7 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         User user = Optional.ofNullable(userMapper.selectByUsernameOrEmail(usernameOrEmail))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail));
-        Set<Role> roles = roleMapper.getRolesByUserId(user.getId());
-        user.setRoles(roles);
+
        return UserPrincipal.create(user);
     }
 
@@ -56,6 +55,8 @@ public class CustomUserDetailService implements UserDetailsService {
             logger.info("查询用户Id:{}", id);
             User user = Optional.of(userMapper.selectByPrimaryKey(id))
                     .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+            Set<Role> roles = roleMapper.getRolesByUserId(user.getId());
+            user.setRoles(roles);
             return UserPrincipal.create(user);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);

@@ -21,15 +21,21 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author minliu
+ * Druid数据源配置类
+ * 访问路径: http://localhost:8082/druid
+ * 用户名密码: admin2 123456
+ *
+ * @author: liumin
+ * @date: 2019/4/7 20:06
+ * @version: JDK1.8
  */
 @Configuration
 @EnableConfigurationProperties(DataSourceProperties.class)
+@SuppressWarnings("all")
 public class DruidSourceConfig {
 
     @Autowired
@@ -52,7 +58,7 @@ public class DruidSourceConfig {
                                           @Value("${spring.datasource.testWhileIdle}") boolean testWhileIdle,
                                           @Value("${spring.datasource.testOnBorrow}") boolean testOnBorrow,
                                           @Value("${spring.datasource.filters}") String filters,
-                                          @Value("${spring.datasource.testOnReturn}") boolean testOnReturn) throws SQLException {
+                                          @Value("${spring.datasource.testOnReturn}") boolean testOnReturn) {
             DruidDataSource dataSource = new DruidDataSource();
             /* 数据源主要配置 */
             dataSource.setUrl(url);
@@ -110,7 +116,7 @@ public class DruidSourceConfig {
     /**
      * 注册一个StatViewServlet
      *
-     * @return
+     * @return ServletRegistrationBean
      */
     @Bean
     public ServletRegistrationBean<StatViewServlet> druidStatViewServle2() {
@@ -124,7 +130,7 @@ public class DruidSourceConfig {
     /**
      * 注册一个：filterRegistrationBean
      *
-     * @return
+     * @return FilterRegistrationBean
      */
     @Bean
     public FilterRegistrationBean<WebStatFilter> druidStatFilter2() {

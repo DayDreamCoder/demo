@@ -1,8 +1,8 @@
 package com.minliu.demo.config.security.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.minliu.demo.common.ResponseEnum;
 import com.minliu.demo.common.WebResponse;
+import com.minliu.demo.util.HttpResponseWriteUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -15,6 +15,7 @@ import java.io.IOException;
 
 /**
  * 用户未登录返回给前端
+ *
  * ClassName: AjaxAuthenticationEntryPoint <br>
  * date: 4:38 PM 01/04/2019 <br>
  *
@@ -28,9 +29,9 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-        logger.error("未登录用户调用...");
-        logger.info("URL:{}",request.getRequestURL().toString());
+        logger.warn("未登录用户调用...");
+        logger.warn("URL:{}",request.getRequestURL().toString());
         WebResponse webResponse = new WebResponse(ResponseEnum.NOT_LOGIN);
-        response.getWriter().write(JSON.toJSONString(webResponse));
+        HttpResponseWriteUtils.writeData(webResponse,response);
     }
 }

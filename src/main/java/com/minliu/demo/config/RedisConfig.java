@@ -26,6 +26,7 @@ import javax.annotation.Resource;
 import java.lang.reflect.Method;
 
 /**
+ * Redis配置类
  * 开启缓存
  * <p>
  * ClassName: CacheConfig <br>

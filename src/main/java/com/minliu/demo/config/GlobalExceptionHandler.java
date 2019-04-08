@@ -1,5 +1,7 @@
 package com.minliu.demo.config;
 
+import com.minliu.demo.common.ResponseEnum;
+import com.minliu.demo.common.WebResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
-    public String handleException(){
-        return "系统异常";
+    public WebResponse handleException(){
+        return new WebResponse(ResponseEnum.SERVER_ERROR);
     }
 }
