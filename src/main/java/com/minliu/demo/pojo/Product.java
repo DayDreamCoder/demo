@@ -13,6 +13,14 @@ public class Product implements Serializable {
 
     private String code;
 
+    public Product(Integer id, String name, Double price, String location, String code) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.location = location;
+        this.code = code;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -53,5 +61,16 @@ public class Product implements Serializable {
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", location='" + location + '\'' +
+                ", code='" + code + '\'' +
+                '}';
     }
 }
