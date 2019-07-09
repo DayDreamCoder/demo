@@ -1,6 +1,5 @@
 package com.minliu.demo.java8demos;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * ClassName: Demo <br>
@@ -13,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Demo {
     public static void main(String[] args) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println("Hello World");
     }
 }
