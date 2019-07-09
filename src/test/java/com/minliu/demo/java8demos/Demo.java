@@ -15,5 +15,6 @@ public class Demo {
     public static void main(String[] args) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println(encoder.encode("12345678"));
+        System.out.println("Hello World");
     }
 }
