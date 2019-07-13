@@ -70,7 +70,7 @@ public class SpringContextHolder implements ApplicationContextAware {
     /**
      * 校验applicationContext是否已注入
      *
-     * @throws RuntimeException
+     * @throw RuntimeException
      */
     private static void assertContextInjected() {
         Assert.notNull(applicationContext, "applicationContext 没有注入...");

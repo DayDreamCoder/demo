@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Demo {
     public static void main(String[] args) {
-        String gen = gen("G=price,H=lbkum,I=zcpsl,J=mngko,K=sl,L=je");
+        String gen = gen("F=price,G=lbkum,H=mngko,I=sl,J=je");
         System.out.println(gen);
     }
 

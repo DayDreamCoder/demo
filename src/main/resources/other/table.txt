@@ -1,0 +1,835 @@
+CREATE TABLE CMBN_PBC3_ZJK_CF800 (  --<CF800> - 投资活动、筹资活动所发生的现金收支明细表
+  uuid        VARCHAR2(200),
+  gjahr       VARCHAR2(10),
+  monat       VARCHAR2(10),
+  bukrs       VARCHAR2(50),
+  butxt       VARCHAR2(100),
+  hkont       VARCHAR2(30), --科目
+  kmmc        VARCHAR2(100), --科目名称
+  hdfl        VARCHAR2(200), --活动分类
+  ywjyms      VARCHAR2(200), --业务简要描述
+  byfse       NUMBER, --本月发生额
+  bnljfse     NUMBER, --本年累计发生额
+  byfse_tz    NUMBER,
+  bnljfse_tz  NUMBER,
+  byfse_pbc   NUMBER,
+  bnljfse_pbc NUMBER,
+  byfse_thz   NUMBER,
+  bnljfse_thz NUMBER,
+  remark      VARCHAR2(200), --备注
+  datasource  VARCHAR2(20),
+  business    VARCHAR2(20),
+  FORM        VARCHAR2(100),
+  CREATOR     VARCHAR2(20),
+  createdate  VARCHAR2(20)
+);
+
+CREATE TABLE cmbn_pbc1_zck_j110 (--J110-在建工程变动表-大类项目
+  uuid          VARCHAR2(150),
+  GJAHR         VARCHAR2(10),
+  MONAT         VARCHAR2(10),
+  BUKRS         VARCHAR2(50),
+  butxt         VARCHAR2(100),
+  currency      VARCHAR2(10),
+  ANLN          VARCHAR2(100), --编号
+  PNAME         VARCHAR2(100), --项目名称
+  RAISED        CHAR DEFAULT 'N', --是否为A股募集资金项目
+  ZYSJE         NUMBER, --总预算金额
+  TDYSS         NUMBER, --其中：土地预算数
+  QCYE          NUMBER, --期初余额
+  BQZJ          NUMBER, --本期增加
+  XSHB          NUMBER, --吸收合并增加/(减少)
+  XGZGSZJ       NUMBER, --新收购/(处理)子公司          增加/(减少)
+  JGDZC         NUMBER, --转入固定资产
+  JQTZC         NUMBER, --其他转出数
+  ZC            VARCHAR2(50), --注资转出/(转入)
+  WBZSCY        NUMBER, --外币报表折算差异
+  QMYE          NUMBER, -- 期末余额
+  QNQC          NUMBER, --期初
+  JTCH          NUMBER, --(计提)/冲回
+  CZJS          NUMBER, --处置减少
+  QM            NUMBER, --期末
+  QCJZ          NUMBER, --期初净值
+  QMJZ          NUMBER, --期末净值
+  ZJLY          VARCHAR2(30), --资金来源
+  ZZGJE         NUMBER, --总转固金额
+  TDZGS         NUMBER, --其中：土地转固数
+  TRYSBL        NUMBER, -- 工程投入占预算比例
+  WGSJ          VARCHAR2(20), --预计完工时间/ 已完工时间
+  LXZBHLJJE     NUMBER, --利息资本化累计金额
+  BQLX          NUMBER, --其中:本期利息资本化金额
+  ZBHL          NUMBER, --本期利息资本化率
+  ZYSJE_tz      NUMBER,
+  TDYSS_tz      NUMBER,
+  QCYE_tz       NUMBER,
+  BQZJ_tz       NUMBER,
+  XSHB_tz       NUMBER,
+  XGZGSZJ_tz    NUMBER,
+  JGDZC_tz      NUMBER,
+  JQTZC_tz      NUMBER,
+  WBZSCY_tz     NUMBER,
+  QMYE_tz       NUMBER,
+  QNQC_tz       NUMBER,
+  JTCH_tz       NUMBER,
+  CZJS_tz       NUMBER,
+  QM_tz         NUMBER,
+  QCJZ_tz       NUMBER,
+  QMJZ_tz       NUMBER,
+  ZZGJE_tz      NUMBER,
+  TDZGS_tz      NUMBER,
+  TRYSBL_tz     NUMBER,
+  LXZBHLJJE_tz  NUMBER,
+  BQLX_tz       NUMBER,
+  ZBHL_tz       NUMBER,
+  ZYSJE_pbc     NUMBER,
+  TDYSS_pbc     NUMBER,
+  QCYE_pbc      NUMBER,
+  BQZJ_pbc      NUMBER,
+  XSHB_pbc      NUMBER,
+  XGZGSZJ_pbc   NUMBER,
+  JGDZC_pbc     NUMBER,
+  JQTZC_pbc     NUMBER,
+  WBZSCY_pbc    NUMBER,
+  QMYE_pbc      NUMBER,
+  QNQC_pbc      NUMBER,
+  JTCH_pbc      NUMBER,
+  CZJS_pbc      NUMBER,
+  QM_pbc        NUMBER,
+  QCJZ_pbc      NUMBER,
+  QMJZ_pbc      NUMBER,
+  ZZGJE_pbc     NUMBER,
+  TDZGS_pbc     NUMBER,
+  TRYSBL_pbc    NUMBER,
+  LXZBHLJJE_pbc NUMBER,
+  BQLX_pbc      NUMBER,
+  ZBHL_pbc      NUMBER,
+  ZYSJE_thz     NUMBER,
+  TDYSS_thz     NUMBER,
+  QCYE_thz      NUMBER,
+  BQZJ_thz      NUMBER,
+  XSHB_thz      NUMBER,
+  XGZGSZJ_thz   NUMBER,
+  JGDZC_thz     NUMBER,
+  JQTZC_thz     NUMBER,
+  WBZSCY_thz    NUMBER,
+  QMYE_thz      NUMBER,
+  QNQC_thz      NUMBER,
+  JTCH_thz      NUMBER,
+  CZJS_thz      NUMBER,
+  QM_thz        NUMBER,
+  QCJZ_thz      NUMBER,
+  QMJZ_thz      NUMBER,
+  ZZGJE_thz     NUMBER,
+  TDZGS_thz     NUMBER,
+  TRYSBL_thz    NUMBER,
+  LXZBHLJJE_thz NUMBER,
+  BQLX_thz      NUMBER,
+  ZBHL_thz      NUMBER,
+  datasource    VARCHAR2(20),
+  business      VARCHAR2(20),
+  FORM          VARCHAR2(100),
+  CREATOR       VARCHAR2(20),
+  createdate    VARCHAR2(20)
+);
+
+
+
+
+
+CREATE TABLE CMBN_PBC1_SWK_O110 ( --O110-应交增值税
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  account    VARCHAR2(100), --项目
+  data       NUMBER, --金额
+  data_tz    NUMBER,
+  data_pbc   NUMBER,
+  data_thz   NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+CREATE TABLE CMBN_PBC1_GK_WHFX (  -- 外汇风险
+  uuid       VARCHAR2(100), --主键
+  gjahr      VARCHAR2(10), --年
+  monat      VARCHAR2(10), --月
+  bukrs      VARCHAR2(50), --公司编码
+  butxt      VARCHAR2(50), --公司名称
+  currency   VARCHAR2(10), --币种
+  account    VARCHAR2(50), --项目
+  QCJE       NUMBER,  -- 期初金额
+  QMJE       NUMBER,  -- 期末金额
+  QCJE_tz    NUMBER,  
+  QMJE_tz    NUMBER,
+  QCJE_pbc   NUMBER,
+  QMJE_pbc   NUMBER,
+  QCJE_thz   NUMBER,
+  QMJE_thz   NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(30),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+CREATE TABLE CMBN_PBC1_GK_LDFX  --流动风险
+(
+  UUID       VARCHAR2(150),
+  GJAHR      VARCHAR2(10),
+  MONAT      VARCHAR2(10),
+  BUKRS      VARCHAR2(50),
+  BUTXT      VARCHAR2(100),
+  CURRENCY   VARCHAR2(20),
+  ACCOUNT    VARCHAR2(50),
+  DATA01     NUMBER,		--6个月以内金额
+  DATA02     NUMBER,		--6个月以上金额
+  DATA03     NUMBER,		--1年以上金额
+  DATA04     NUMBER,		--合计
+  DATA01_TZ  NUMBER,
+  DATA02_TZ  NUMBER,
+  DATA03_TZ  NUMBER,
+  DATA04_TZ  NUMBER,
+  DATA01_PBC NUMBER,
+  DATA02_PBC NUMBER,
+  DATA03_PBC NUMBER,
+  DATA04_PBC NUMBER,
+  DATA01_THZ NUMBER,
+  DATA02_THZ NUMBER,
+  DATA03_THZ NUMBER,
+  DATA04_THZ NUMBER,
+  DATASOURCE VARCHAR2(20),
+  BUSINESS   VARCHAR2(20),
+  FORM       VARCHAR2(30),
+  CREATOR    VARCHAR2(20),
+  CREATEDATE VARCHAR2(20)
+)
+
+CREATE TABLE CMBN_PBC1_SYK_U140 ( --U140 是大客户
+  uuid        VARCHAR2(100),
+  gjahr       VARCHAR2(6),
+  monat       VARCHAR2(6),
+  bukrs       VARCHAR2(50),
+  butxt       VARCHAR2(50),
+  kunrg       VARCHAR2(50), --客户编码
+  QMXSE       NUMBER, --销售额
+  ZXSJEBL     NUMBER, --销售额（不含税）
+  QMYSZK      NUMBER, --占总销售金额的比例
+  QCYSZK      NUMBER, --应收账款余额
+  QMXSE_tz    NUMBER,
+  ZXSJEBL_tz  NUMBER,
+  QMYSZK_tz   NUMBER,
+  QCYSZK_tz   NUMBER,
+  QMXSE_pbc   NUMBER,
+  ZXSJEBL_pbc NUMBER,
+  QMYSZK_pbc  NUMBER,
+  QCYSZK_pbc  NUMBER,
+  QMXSE_thz   NUMBER,
+  ZXSJEBL_thz NUMBER,
+  QMYSZK_thz  NUMBER,
+  QCYSZK_thz  NUMBER,
+  WLSJ        VARCHAR2(50), --往来时间
+  YWFW        VARCHAR2(50), --业务范围
+  ZCZB        VARCHAR2(50), --注册资本
+  ZJ          NUMBER, --资金
+  dz          VARCHAR2(100), --地址
+  xyje        NUMBER, --信用金额
+  remark      VARCHAR2(100), --备注
+  form        VARCHAR2(50),
+  creator     VARCHAR2(50)
+);
+
+
+
+
+CREATE TABLE CMBN_PBC1_ZJK_T400  --T400-利润分配
+(
+  UUID       VARCHAR2(100),
+  GJAHR      VARCHAR2(10),
+  MONAT      VARCHAR2(10),
+  BUKRS      VARCHAR2(50),
+  BUTXT      VARCHAR2(50),
+  CURRENCY   VARCHAR2(10),
+  ACCOUNT    VARCHAR2(100), --项目
+  DATA       NUMBER, --金额
+  DATA_TZ    NUMBER,
+  DATA_PBC   NUMBER,
+  DATA_TZH   NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(30),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+CREATE TABLE cmbn_pbc1_cbk_u300 (--U300-其他业务利润
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  currency   VARCHAR2(20),
+  account    VARCHAR2(50), --项目
+  bndy       NUMBER, --本年当月
+  bnlj       NUMBER, --本年累计
+  qnlj       NUMBER, --去年同期累计
+  bdje       NUMBER, --变动金额
+  bdbl       NUMBER, --变动比例
+  bndy_tz    NUMBER,
+  bnlj_tz    NUMBER,
+  qnlj_tz    NUMBER,
+  bnlj_pbc   NUMBER,
+  bndy_pbc   NUMBER,
+  qnlj_pbc   NUMBER,
+  bndy_thz   NUMBER,
+  bnlj_thz   NUMBER,
+  qnlj_thz   NUMBER,
+  bdyy       VARCHAR2(100), --变动原因
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(30),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+CREATE TABLE CMBN_PBC1_ZJK_N100 (  --N100-应付票据
+  uuid       VARCHAR2(300), --主键
+  gjahr      VARCHAR2(10), --年
+  monat      VARCHAR2(10), --月
+  bukrs      VARCHAR2(50), --公司编码
+  butxt      VARCHAR2(80), --公司名称
+  currency   VARCHAR2(10), --币种
+  pjlx       VARCHAR2(50), --票据类型
+  zqdwfl     VARCHAR2(100), --债权单位分类
+  kxxz       VARCHAR2(100), --款项性质
+  cdyh       VARCHAR2(100), --承兑银行
+  skr        VARCHAR2(100), --收款人
+  cpr        VARCHAR2(50), --出票日
+  dqr        VARCHAR2(50), --到期日
+  pjhm       VARCHAR2(100), --票据号码
+  pjje       NUMBER, --票据金额
+  data01     NUMBER, --3个月内
+  data02     NUMBER, --3至6个月
+  data03     NUMBER, --6至12个月
+  yhcdje     NUMBER, --银行承兑金额
+  sycdje     NUMBER, --商业承兑金额
+  dwfl       VARCHAR2(20), --单位分类
+  pjje_tz    NUMBER,
+  data01_tz  NUMBER,
+  data02_tz  NUMBER,
+  data03_tz  NUMBER,
+  yhcdje_tz  NUMBER,
+  sycdje_tz  NUMBER,
+  pjje_pbc   NUMBER,
+  data01_pbc NUMBER,
+  data02_pbc NUMBER,
+  data03_pbc NUMBER,
+  yhcdje_pbc NUMBER,
+  sycdje_pbc NUMBER,
+  pjje_thz   NUMBER,
+  data01_thz NUMBER,
+  data02_thz NUMBER,
+  data03_thz NUMBER,
+  yhcdje_thz NUMBER,
+  sycdje_thz NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(30),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+)
+
+
+CREATE TABLE cmbn_pbc1_zjk_bqbs ( --应收票据-本期背书
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  pjhm       VARCHAR2(100), --票据号码
+  hsbsrlb    VARCHAR2(100), --后手背书人类别
+  bsje       NUMBER, --商业汇票背书金额
+  kxyt       VARCHAR2(100), --款项用途
+  bsrq       VARCHAR2(20), --背书日期
+  pjdqr      VARCHAR2(20), --票据到期日
+  hsbsr      VARCHAR2(50), --后手背书人
+  dwfl       VARCHAR2(20), --单位分类
+  bsje_tz    NUMBER,
+  bsje_pbc   NUMBER,
+  bsje_tzh   NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(30),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+CREATE TABLE cmbn_pbc1_zjk_s800_wdqybs ( --S800应收票据-未到期已背书
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  pjlx       VARCHAR2(100), --票据类型
+  cpdw       VARCHAR2(100), --出票单位
+  pjhm       VARCHAR2(100), --票据号码
+  kxxz       VARCHAR2(100), --款项性质
+  dwlb       VARCHAR2(50), --出票单位类别
+  qsbsrlb    VARCHAR2(50), --前手 背书人类别
+  hsbsrlb    VARCHAR2(50), --后手背书人类别
+  bsje       NUMBER, --商业汇票背书金额
+  bsrq       VARCHAR2(20), --背书日期
+  cpr        VARCHAR2(20), --出票日
+  dqr        VARCHAR2(20), --到期日
+  qsbsr      VARCHAR2(100), --前手背书人
+  hsbsr      VARCHAR2(100), --后手背书人
+  cpyh       VARCHAR2(100), --出票银行
+  cpyhlx     VARCHAR2(50), --出票银行类型
+  bsje_tz    NUMBER,
+  bsje_pbc   NUMBER,
+  bsje_tzh   NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+CREATE TABLE cmbn_pbc3_zjk_cf300 ( --CF300-为职工支付现金明细表
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(100),
+  butxt      VARCHAR2(100),
+  currency   VARCHAR2(10),
+  account    VARCHAR2(30), --交易内容
+  data       NUMBER, --支付现金
+  data_tz    NUMBER,
+  data_pbc   NUMBER,
+  data_tzh   NUMBER,
+  remark     VARCHAR2(100), --备注
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(30),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+
+
+CREATE TABLE cmbn_pbc1_zck_j100 ( --J100-在建工程变动表-工程明细
+  uuid          VARCHAR2(150),
+  GJAHR         VARCHAR2(10),
+  MONAT         VARCHAR2(10),
+  BUKRS         VARCHAR2(50),
+  butxt         VARCHAR2(100),
+  currency      VARCHAR2(10),
+  ANLN          VARCHAR2(50), --编号
+  PNAME         VARCHAR2(50), --项目名称
+  GCMC          VARCHAR2(100), --工程名称
+  RAISED        CHAR DEFAULT 'N', --是否为A股募集资金项目
+  GYSMC         VARCHAR2(50), --供应商名称
+  ISCFL         CHAR DEFAULT 'N', --是否为预付账款重分类
+  QCYE          NUMBER, --期初余额
+  BQZJ          NUMBER, --本期增加
+  XSHB          NUMBER, --吸收合并增加/(减少)
+  XGZGSZJ       NUMBER, --新收购/(处理)子公司          增加/(减少)
+  JGDZC         VARCHAR2(50), --转入固定资产
+  JQTZC         NUMBER, --其他转出数
+  ZC            NUMBER, --注资转出/(转入)
+  WBZSCY        NUMBER, --外币报表折算差异
+  QMYE          NUMBER, -- 期末余额
+  QNQC          NUMBER, --期初
+  JTCH          NUMBER, --(计提)/冲回
+  CZJS          NUMBER, --处置减少
+  QM            NUMBER, --期末
+  QCJZ          NUMBER, --期初净值
+  QMJZ          NUMBER, --期末净值
+  ZJLY          VARCHAR2(30), --资金来源
+  LXZBHLJJE     NUMBER, --利息资本化累计金额
+  BQLX          NUMBER, --其中:本期利息资本化金额
+  ZBHL          NUMBER, --本期利息资本化率
+  QCYE_tz       NUMBER,
+  BQZJ_tz       NUMBER,
+  XSHB_tz       NUMBER,
+  XGZGSZJ_tz    NUMBER,
+  JQTZC_tz      NUMBER,
+  ZC_tz         NUMBER,
+  WBZSCY_tz     NUMBER,
+  QMYE_tz       NUMBER,
+  QNQC_tz       NUMBER,
+  JTCH_tz       NUMBER,
+  CZJS_tz       NUMBER,
+  QM_tz         NUMBER,
+  QCJZ_tz       NUMBER,
+  QMJZ_tz       NUMBER,
+  LXZBHLJJE_tz  NUMBER,
+  BQLX_tz       NUMBER,
+  ZBHL_tz       NUMBER,
+  QCYE_pbc      NUMBER,
+  BQZJ_pbc      NUMBER,
+  XSHB_pbc      NUMBER,
+  XGZGSZJ_pbc   NUMBER,
+  JQTZC_pbc     NUMBER,
+  ZC_pbc        NUMBER,
+  WBZSCY_pbc    NUMBER,
+  QMYE_pbc      NUMBER,
+  QNQC_pbc      NUMBER,
+  JTCH_pbc      NUMBER,
+  CZJS_pbc      NUMBER,
+  QM_pbc        NUMBER,
+  QCJZ_pbc      NUMBER,
+  QMJZ_pbc      NUMBER,
+  LXZBHLJJE_pbc NUMBER,
+  BQLX_pbc      NUMBER,
+  ZBHL_pbc      NUMBER,
+  QCYE_thz      NUMBER,
+  BQZJ_thz      NUMBER,
+  XSHB_thz      NUMBER,
+  XGZGSZJ_thz   NUMBER,
+  JQTZC_thz     NUMBER,
+  ZC_thz        NUMBER,
+  WBZSCY_thz    NUMBER,
+  QMYE_thz      NUMBER,
+  QNQC_thz      NUMBER,
+  JTCH_thz      NUMBER,
+  CZJS_thz      NUMBER,
+  QM_thz        NUMBER,
+  QCJZ_thz      NUMBER,
+  QMJZ_thz      NUMBER,
+  LXZBHLJJE_thz NUMBER,
+  BQLX_thz      NUMBER,
+  ZBHL_thz      NUMBER,
+  datasource    VARCHAR2(20),
+  business      VARCHAR2(20),
+  FORM          VARCHAR2(100),
+  CREATOR       VARCHAR2(20),
+  createdate    VARCHAR2(20)
+);
+
+
+CREATE TABLE cmbn_pbc1_zck_j120 ( --J120-在建工程本期增加明细表
+  uuid       VARCHAR2(150),
+  GJAHR      VARCHAR2(10),
+  MONAT      VARCHAR2(10),
+  BUKRS      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  currency   VARCHAR2(10),
+  ANLN       VARCHAR2(100), --编号
+  XMMC       VARCHAR2(100), --项目名称
+  GCMC       VARCHAR2(100), --工程名称
+  RAISED     CHAR DEFAULT 'N', --是否为A股募集资金
+  ZJFS       VARCHAR2(100), --增加方式
+  GYS        VARCHAR2(100), --供应商
+  GRCB       NUMBER, --购入成本
+  dwfl       VARCHAR2(100), --单位分类
+  remakr     VARCHAR2(200), --备注
+  GRCB_tz    NUMBER,
+  GRCB_pbc   NUMBER,
+  GRCB_tzh   NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+CREATE TABLE cmbn_pbc1_zck_j130 ( --J130-在建工程其他减少明细表
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  anln       VARCHAR2(100), --编码
+  xmmc       VARCHAR2(100), --项目名称
+  gcmc       VARCHAR2(100), --工程名称
+  jsfs       VARCHAR2(100), --减少方式
+  dykm       VARCHAR2(100), --对应科目
+  raised     CHAR DEFAULT 'N', --是否为A股募集资金项目
+  gmdw       VARCHAR2(100), --购买单位
+  czrq       VARCHAR2(20), --处置日期
+  zcje       NUMBER, --转出金额
+  jzzb       NUMBER, --减值准备
+  jz         NUMBER, --净值
+  qlsr       NUMBER, --清理收入
+  qlfy       NUMBER, --清理费用
+  sjsj       NUMBER, --涉及税金
+  syss       NUMBER, --收益损失
+  zcje_tz    NUMBER,
+  jzzb_tz    NUMBER,
+  jz_tz      NUMBER,
+  qlsr_tz    NUMBER,
+  qlfy_tz    NUMBER,
+  sjsj_tz    NUMBER,
+  syss_tz    NUMBER,
+  zcje_pbc   NUMBER,
+  jzzb_pbc   NUMBER,
+  jz_pbc     NUMBER,
+  qlsr_pbc   NUMBER,
+  qlfy_pbc   NUMBER,
+  sjsj_pbc   NUMBER,
+  syss_pbc   NUMBER,
+  zcje_thz   NUMBER,
+  jzzb_thz   NUMBER,
+  jz_thz     NUMBER,
+  qlsr_thz   NUMBER,
+  qlfy_thz   NUMBER,
+  sjsj_thz   NUMBER,
+  syss_thz   NUMBER,
+  remark     VARCHAR2(200), -- 备注
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+CREATE TABLE cmbn_plan_zfir008 ( --预算 zfir008
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  currency   VARCHAR2(20),
+  racct      VARCHAR2(100), --科目名称
+  data       NUMBER, --本币金额
+  data_tz    NUMBER,
+  data_pbc   NUMBER,
+  data_tzh   NUMBER,
+  rcntr      VARCHAR2(100), --成本中心
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+CREATE TABLE cmbn_plan_zcor015 ( --预算 zcor015
+  uuid       VARCHAR2(200),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  prcrt      VARCHAR2(100), --利润中心
+  KTEXT      VARCHAR2(100), --利润中心名称
+  matnr      VARCHAR2(100), --物料编码
+  pktext     VARCHAR2(100), --伙伴利润中心名称
+  COUNT1     NUMBER, --数量
+  INCOME     NUMBER, --收入
+  ACOST      NUMBER, --实际成本
+  PRICE      NUMBER, --单价
+  PACOST     NUMBER, --单台实际成本
+  PPROFI     NUMBER, --单台毛利
+  RPRICE     NUMBER, --实际采购价格
+  COUNT1_tz  NUMBER,
+  INCOME_tz  NUMBER,
+  ACOST_tz   NUMBER,
+  PRICE_tz   NUMBER,
+  PACOST_tz  NUMBER,
+  PPROFI_tz  NUMBER,
+  RPRICE_tz  NUMBER,
+  COUNT1_pbc NUMBER,
+  INCOME_pbc NUMBER,
+  ACOST_pbc  NUMBER,
+  PRICE_pbc  NUMBER,
+  PACOST_pbc NUMBER,
+  PPROFI_pbc NUMBER,
+  RPRICE_pbc NUMBER,
+  COUNT1_thz NUMBER,
+  INCOME_thz NUMBER,
+  ACOST_thz  NUMBER,
+  PRICE_thz  NUMBER,
+  PACOST_thz NUMBER,
+  PPROFI_thz NUMBER,
+  RPRICE_thz NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+
+CREATE TABLE cmbn_pbc1_syk_u111 (--U111销售收入-其他
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  currency   VARCHAR2(10),
+  fwqf       VARCHAR2(50), --范围区分(整车-损益科销售-损益科,零部件-成本科....)
+  cplb       VARCHAR2(100), --产品类别
+  cpmc       VARCHAR2(100), --产品名称
+  xh         VARCHAR2(100), --型号
+  dw         VARCHAR2(20), --单位
+  qtzrzcsm   VARCHAR2(200), --其他转入转出说明
+  byzrsl     NUMBER, -- 本月转入数量
+  byzrje     NUMBER, -- 本月转入金额
+  bnzrsl     NUMBER, -- 本年转入数量
+  bnzrje     NUMBER, -- 本年转入金额
+  byzcsl     NUMBER, -- 本月转出数量
+  byzcje     NUMBER, -- 本月转出金额
+  bnzcsl     NUMBER, -- 本月转出数量
+  bnzcje     NUMBER, -- 本月转出金额
+  byzrsl_tz  NUMBER,
+  byzrje_tz  NUMBER,
+  bnzrsl_tz  NUMBER,
+  bnzrje_tz  NUMBER,
+  byzcsl_tz  NUMBER,
+  byzcje_tz  NUMBER,
+  bnzcsl_tz  NUMBER,
+  bnzcje_tz  NUMBER,
+  byzrsl_pbc NUMBER,
+  byzrje_pbc NUMBER,
+  bnzrsl_pbc NUMBER,
+  bnzrje_pbc NUMBER,
+  byzcsl_pbc NUMBER,
+  byzcje_pbc NUMBER,
+  bnzcsl_pbc NUMBER,
+  bnzcje_pbc NUMBER,
+  byzrsl_thz NUMBER,
+  byzrje_thz NUMBER,
+  bnzrsl_thz NUMBER,
+  bnzrje_thz NUMBER,
+  byzcsl_thz NUMBER,
+  byzcje_thz NUMBER,
+  bnzcsl_thz NUMBER,
+  bnzcje_thz NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+ 
+CREATE TABLE CMBN_PBC1_ZCK_U1210  --U1210-资产处置损益明细表
+(
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10), --年
+  monat      VARCHAR2(10), --月
+  bukrs      VARCHAR2(50), --公司编码
+  butxt      VARCHAR2(100), --公司名称
+  currency   VARCHAR2(10), --币种
+  sydy       NUMBER, --资产处置收益 	本年当月
+  sylj       NUMBER, --资产处置收益 	本年累计
+  ssdy       NUMBER, --资产处置损失 	本年当月
+  sslj       NUMBER, --资产处置损失 	本年累计
+  sydy_tz    NUMBER,
+  sylj_tz    NUMBER,
+  ssdy_tz    NUMBER,
+  sslj_tz    NUMBER,
+  sydy_pbc   NUMBER,
+  sylj_pbc   NUMBER,
+  ssdy_pbc   NUMBER,
+  sslj_pbc   NUMBER,
+  sydy_tzh   NUMBER,
+  sylj_tzh   NUMBER,
+  ssdy_tzh   NUMBER,
+  sslj_tzh   NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+CREATE TABLE cmbn_pbc1_syk_u112 (--U112各月产销收入成本明细
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10),
+  monat      VARCHAR2(10),
+  bukrs      VARCHAR2(50),
+  butxt      VARCHAR2(100),
+  oversea    VARCHAR2(20), --是否是海外
+  cplb       VARCHAR2(100), --产品类别
+  ggxh       VARCHAR2(100), --规格型号
+  cpmc       VARCHAR2(100), --产品名称
+  xfcx       VARCHAR2(100), --细分车型
+  sl         NUMBER, --数量
+  jg         NUMBER, --价格
+  xssr       NUMBER, --销售收入
+  dwcb       NUMBER, --单位成本
+  xscb       NUMBER, --销售成本
+  zzsrbz     NUMBER, --占销售总收入比重
+  mll        NUMBER, --毛利率
+  sl_tz      NUMBER,
+  jg_tz      NUMBER,
+  xssr_tz    NUMBER,
+  dwcb_tz    NUMBER,
+  xscb_tz    NUMBER,
+  zzsrbz_tz  NUMBER,
+  mll_tz     NUMBER,
+  sl_pbc     NUMBER,
+  jg_pbc     NUMBER,
+  xssr_pbc   NUMBER,
+  dwcb_pbc   NUMBER,
+  xscb_pbc   NUMBER,
+  zzsrbz_pbc NUMBER,
+  mll_pbc    NUMBER,
+  sl_thz     NUMBER,
+  jg_thz     NUMBER,
+  xssr_thz   NUMBER,
+  dwcb_thz   NUMBER,
+  xscb_thz   NUMBER,
+  zzsrbz_thz NUMBER,
+  mll_thz    NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+
+CREATE TABLE CMBN_PBC1_ZCK_U1210 --U1210-资产处置损益明细表
+(
+  uuid       VARCHAR2(150),
+  gjahr      VARCHAR2(10), --年
+  monat      VARCHAR2(10), --月
+  bukrs      VARCHAR2(50), --公司编码
+  butxt      VARCHAR2(100), --公司名称
+  currency   VARCHAR2(10), --币种
+  khfl       VARCHAR2(20), --客户分类
+  khdwmc     VARCHAR2(100), --客户单位名称
+  sydy       NUMBER, --资产处置收益 	本年当月
+  sylj       NUMBER, --资产处置收益 	本年累计
+  ssdy       NUMBER, --资产处置损失 	本年当月
+  sslj       NUMBER, --资产处置损失 	本年累计
+  sydy_tz    NUMBER,
+  sylj_tz    NUMBER,
+  ssdy_tz    NUMBER,
+  sslj_tz    NUMBER,
+  sydy_pbc   NUMBER,
+  sylj_pbc   NUMBER,
+  ssdy_pbc   NUMBER,
+  sslj_pbc   NUMBER,
+  sydy_tzh   NUMBER,
+  sylj_tzh   NUMBER,
+  ssdy_tzh   NUMBER,
+  sslj_tzh   NUMBER,
+  datasource VARCHAR2(20),
+  business   VARCHAR2(20),
+  FORM       VARCHAR2(100),
+  CREATOR    VARCHAR2(20),
+  createdate VARCHAR2(20)
+);
+
+
+
+
+LOAD{TYPE:INSERT;SQL:INSERT INTO CMBN_PBC1_ZJK_ZJYS_02( uuid,year,PERIOD,entity,entityt,currency,datasource,business,form,createdate,creator,tzsx,tztj,data01_tzh)VALUES('#{I_D}','#{END_YEAR}','#{END_PERIOD}','#{ENTITY}','{COMPANY}','手动','损益','资金预算差异率分析',to_char(sysdate),'{USERNM}','RMB','#{CB}','#{CD}',#{CC})}
+
+LOAD{TYPE:INSERT;SQL:INSERT INTO CMBN_PBC1_ZJK_ZJYS_03(uuid,year,PERIOD,entity,entityt,currency,datasource,business,form,createdate,creator,data01_tzh,data02_tzh,data03_tzh)VALUES('#{I_D}','#{END_YEAR}','#{END_PERIOD}','#{ENTITY}','{COMPANY}','手动','损益','资金预算差异率分析',to_char(sysdate),'{USERNM}','RMB',#{CB},#{CC},#{CD})}
