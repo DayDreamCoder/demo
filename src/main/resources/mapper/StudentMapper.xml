@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.minliu.demo.mapper.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.minliu.demo.pojo.Student">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="clazz" jdbcType="VARCHAR" property="clazz"/>
+        <result column="teacher" jdbcType="VARCHAR" property="teacher"/>
+        <result column="school" jdbcType="VARCHAR" property="school"/>
+        <result column="comment" jdbcType="VARCHAR" property="comment"/>
+    </resultMap>
+
+    <insert id="batchInsert">
+        INSERT INTO student(name,age,nickname,gender,score,country,
+        address,clazz ,teacher,school,comment)
+        VALUES
+        <foreach collection="dataList" item="item" separator=",">
+            (
+            #{item.name,jdbcType=VARCHAR},
+            #{item.age,jdbcType=INTEGER},
+            #{item.nickname,jdbcType=VARCHAR},
+            #{item.gender,jdbcType=VARCHAR},
+            #{item.score,jdbcType=INTEGER},
+            #{item.country,jdbcType=VARCHAR},
+            #{item.address,jdbcType=VARCHAR},
+            #{item.clazz,jdbcType=VARCHAR},
+            #{item.teacher,jdbcType=VARCHAR},
+            #{item.school,jdbcType=VARCHAR},
+            #{item.comment,jdbcType=VARCHAR}
+            )
+        </foreach>
+
+    </insert>
+</mapper>
